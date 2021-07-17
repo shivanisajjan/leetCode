@@ -34,3 +34,22 @@ class Solution:
                 else:
                     image[i][j] = 0
         return image
+
+# https: // leetcode.com / problems / flood - fill /
+    class Solution:
+        def floodFill(self, image: List[List[int]], sr: int, sc: int, newColor: int) -> List[List[int]]:
+            R, C = len(image), len(image[0])
+            actualColor = image[sr][sc]
+            if actualColor == newColor:
+                return image
+
+            def dfs(r, c):
+                if image[r][c] == actualColor:
+                    image[r][c] = newColor
+                    if r > 0: dfs(r - 1, c)
+                    if r < R - 1: dfs(r + 1, c)
+                    if c > 0: dfs(r, c - 1)
+                    if c < C - 1: dfs(r, c + 1)
+
+            dfs(sr, sc)
+            return image
